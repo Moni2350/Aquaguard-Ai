@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaGuard AI – Watershed Priority & Conservation Decision Support System</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Leaflet GIS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Top App Navigation Bar -->
+  <header class="app-header">
+    <div class="brand-wrapper">
+      <div class="brand-icon">
+        <i class="fa-solid fa-water"></i>
+      </div>
+      <div>
+        <div class="brand-title">AquaGuard AI</div>
+        <div class="brand-subtitle">Intelligent Watershed Priority Mapping & Water Conservation DSS</div>
+      </div>
+    </div>
+
+    <!-- Global Action Bar -->
+    <div class="header-actions">
+      <button class="btn btn-outline btn-sm" id="btn-formula-modal">
+        <i class="fa-solid fa-calculator"></i> Scoring Formula
+      </button>
+      <a href="/api/export/csv" class="btn btn-outline btn-sm" id="btn-export-csv" download>
+        <i class="fa-solid fa-file-csv"></i> Export CSV Rankings
+      </a>
+      <button class="btn btn-primary btn-sm" id="btn-download-pdf">
+        <i class="fa-solid fa-file-pdf"></i> Download PDF Diagnostic
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Tri-Pane Grid Dashboard -->
+  <main class="dashboard-grid">
+    
+    <!-- LEFT PANEL: Ranked Watersheds List & National Summary -->
+    <aside class="sidebar-panel">
+      
+      <!-- National Aggregate Counts -->
+      <div class="stats-banner">
+        <div class="stat-pill pill-crit">
+          <span class="stat-label">Critical</span>
+          <span class="stat-number" id="count-critical">--</span>
+        </div>
+        <div class="stat-pill pill-high">
+          <span class="stat-label">High</span>
+          <span class="stat-number" id="count-high">--</span>
+        </div>
+        <div class="stat-pill pill-med">
+          <span class="stat-label">Medium</span>
+          <span class="stat-number" id="count-medium">--</span>
+        </div>
+        <div class="stat-pill pill-low">
+          <span class="stat-label">Low</span>
+          <span class="stat-number" id="count-low">--</span>
+        </div>
+      </div>
+
+      <!-- Ranked List Card -->
+      <div class="glass-panel" style="flex: 1; display: flex; flex-direction: column;">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-ranking-star" style="color: var(--accent-amber);"></i>
+            Prioritized Watersheds
+          </div>
+          <span class="badge" id="total-count-badge" style="font-size: 0.75rem; color: var(--text-muted);">22 Basins</span>
+        </div>
+
+        <div style="padding: 10px 14px 6px;">
+          <input type="text" id="ws-search-input" placeholder="Search state, district, or name..." 
+                 style="width: 100%; padding: 8px 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; color: #fff; font-size: 0.8rem; outline: none;">
+        </div>
+
+        <div class="card-body" style="flex: 1;">
+          <div class="watershed-list" id="watershed-list-container">
+            <!-- Dynamically populated by main.js -->
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER PANEL: Interactive GIS Leaflet Map & Scenarios -->
+    <section class="map-view-panel">
+      <div class="glass-panel map-card">
+        
+        <!-- Floating Filter Tools -->
+        <div class="map-floating-overlay">
+          <button class="btn btn-outline btn-sm" id="btn-reset-map" title="Reset View to India Extent">
+            <i class="fa-solid fa-crosshairs"></i> Reset Extent
+          </button>
+        </div>
+
+        <!-- The Map Element -->
+        <div id="map"></div>
+
+        <!-- Dynamic Map Legend -->
+        <div class="map-legend">
+          <div style="font-weight: 700; margin-bottom: 6px; color: var(--text-main);">Priority Classification</div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-critical);"></div>
+            <span>Critical Stress (7.5 - 10.0)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-high);"></div>
+            <span>High Priority (5.5 - 7.4)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-medium);"></div>
+            <span>Medium Priority (4.0 - 5.4)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--color-low);"></div>
+            <span>Low Priority (1.0 - 3.9)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Water Risk Climate Simulator Card -->
+      <div class="glass-panel" style="padding: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div class="card-title">
+            <i class="fa-solid fa-cloud-bolt" style="color: var(--accent-cyan);"></i>
+            Water Risk Climate Simulator (Stress Testing)
+          </div>
+          <button class="btn btn-outline btn-sm" id="btn-reset-risk-sim">
+            <i class="fa-solid fa-rotate-left"></i> Reset Baseline
+          </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: center;">
+          <div class="control-group" style="margin-bottom: 0;">
+            <div class="control-label">
+              <span>Monsoon Rainfall Deficit / Drop</span>
+              <span class="slider-val" id="val-rainfall-drop">0%</span>
+            </div>
+            <input type="range" class="slider" id="slider-rainfall-drop" min="-60" max="40" step="5" value="0">
+          </div>
+
+          <div class="control-group" style="margin-bottom: 0;">
+            <div class="control-label">
+              <span>Vegetation / NDVI Drought Loss</span>
+              <span class="slider-val" id="val-ndvi-drop">0%</span>
+            </div>
+            <input type="range" class="slider" id="slider-ndvi-drop" min="-50" max="30" step="5" value="0">
+          </div>
+
+          <div>
+            <button class="btn btn-primary" id="btn-apply-risk-sim">
+              <i class="fa-solid fa-play"></i> Run Risk Scenario
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Selected Watershed Diagnostics & Intervention Impact -->
+    <aside class="right-panel">
+      
+      <!-- Selected Watershed Overview -->
+      <div class="glass-panel">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-circle-info" style="color: var(--accent-cyan);"></i>
+            Active Watershed Diagnostic
+          </div>
+          <button class="btn btn-outline btn-sm" id="btn-explain-score" style="border-color: var(--accent-cyan);">
+            <i class="fa-solid fa-chart-pie"></i> Explain Score
+          </button>
+        </div>
+        <div class="card-body">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <h3 id="detail-ws-name" style="font-size: 1.1rem; color: #fff; margin-bottom: 2px;">Loading...</h3>
+              <div id="detail-ws-loc" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">--</div>
+            </div>
+            <div id="detail-score-pill" style="text-align: right;">
+              <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Stress Score</div>
+              <div id="detail-score-val" style="font-size: 1.5rem; font-weight: 800; color: #fff;">--</div>
+            </div>
+          </div>
+
+          <!-- Parameter Specs Matrix -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem;">
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Rainfall</div>
+              <div id="spec-rainfall" style="font-weight: 700; color: #fff;">-- mm</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Vigor (NDVI)</div>
+              <div id="spec-ndvi" style="font-weight: 700; color: #fff;">--</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Relief / Slope</div>
+              <div id="spec-slope" style="font-weight: 700; color: #fff;">--°</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Drainage Density</div>
+              <div id="spec-dd" style="font-weight: 700; color: #fff;">-- km/km²</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Soil Class</div>
+              <div id="spec-soil" style="font-weight: 700; color: #fff;">--</div>
+            </div>
+            <div style="background: rgba(30,41,59,0.5); padding: 8px; border-radius: 6px;">
+              <div style="color: var(--text-dim);">Surface Water</div>
+              <div id="spec-sw" style="font-weight: 700; color: #fff;">--%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERVENTION IMPACT SIMULATOR -->
+      <div class="glass-panel simulator-card" style="flex: 1; display: flex; flex-direction: column;">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-emerald);"></i>
+            Intervention Impact Simulator
+          </div>
+          <button class="btn btn-outline btn-sm" id="btn-reset-interventions">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Clear
+          </button>
+        </div>
+
+        <div class="card-body" style="flex: 1;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+            Select engineering interventions to simulate recharge gain and risk reduction:
+          </div>
+
+          <div class="intervention-picker" id="intervention-checklist">
+            <label class="intervention-checkbox-item checked" data-type="Check Dam">
+              <div class="int-info">
+                <input type="checkbox" value="Check Dam" checked style="accent-color: var(--accent-emerald); transform: scale(1.15);">
+                <div class="int-icon"><i class="fa-solid fa-water"></i></div>
+                <div>
+                  <div class="int-title">Check Dam Network</div>
+                  <div style="font-size: 0.7rem; color: var(--text-dim);">Stream gully velocity control</div>
+                </div>
+              </div>
+              <span class="int-impact-pill">-1.15 Score</span>
+            </label>
+
+            <label class="intervention-checkbox-item checked" data-type="Percolation Pond">
+              <div class="int-info">
+                <input type="checkbox" value="Percolation Pond" checked style="accent-color: var(--accent-emerald); transform: scale(1.15);">
+                <div class="int-icon"><i class="fa-solid fa-circle-notch"></i></div>
+                <div>
+                  <div class="int-title">Percolation Pond System</div>
+                  <div style="font-size: 0.7rem; color: var(--text-dim);">Subsurface deep infiltration</div>
+                </div>
+              </div>
+              <span class="int-impact-pill">-1.30 Score</span>
+            </label>
+
+            <label class="intervention-checkbox-item" data-type="Farm Pond">
+              <div class="int-info">
+                <input type="checkbox" value="Farm Pond" style="accent-color: var(--accent-emerald); transform: scale(1.15);">
+                <div class="int-icon"><i class="fa-solid fa-seedling"></i></div>
+                <div>
+                  <div class="int-title">Decentralized Farm Ponds</div>
+                  <div style="font-size: 0.7rem; color: var(--text-dim);">Protective dryland irrigation</div>
+                </div>
+              </div>
+              <span class="int-impact-pill">-0.95 Score</span>
+            </label>
+
+            <label class="intervention-checkbox-item" data-type="Contour Trench">
+              <div class="int-info">
+                <input type="checkbox" value="Contour Trench" style="accent-color: var(--accent-emerald); transform: scale(1.15);">
+                <div class="int-icon"><i class="fa-solid fa-mountain"></i></div>
+                <div>
+                  <div class="int-title">Contour Trenching / Bunds</div>
+                  <div style="font-size: 0.7rem; color: var(--text-dim);">Ridge slope moisture capture</div>
+                </div>
+              </div>
+              <span class="int-impact-pill">-1.05 Score</span>
+            </label>
+
+            <label class="intervention-checkbox-item" data-type="Rainwater Harvesting">
+              <div class="int-info">
+                <input type="checkbox" value="Rainwater Harvesting" style="accent-color: var(--accent-emerald); transform: scale(1.15);">
+                <div class="int-icon"><i class="fa-solid fa-cloud-rain"></i></div>
+                <div>
+                  <div class="int-title">Rainwater Harvesting (RWH)</div>
+                  <div style="font-size: 0.7rem; color: var(--text-dim);">Direct community shallow recharge</div>
+                </div>
+              </div>
+              <span class="int-impact-pill">-0.70 Score</span>
+            </label>
+          </div>
+
+          <!-- Simulation Output Results -->
+          <div class="sim-result-box" id="sim-result-container">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-emerald); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-square-poll-vertical"></i> Predicted Simulation Outcomes
+            </div>
+
+            <div class="sim-metrics-grid">
+              <div class="sim-metric-cell">
+                <div class="label">Current Score</div>
+                <div class="value" id="sim-res-curr">--</div>
+              </div>
+              <div class="sim-metric-cell" style="border: 1px solid var(--accent-cyan);">
+                <div class="label">Predicted Score</div>
+                <div class="value" id="sim-res-pred" style="color: var(--accent-cyan);">--</div>
+              </div>
+              <div class="sim-metric-cell">
+                <div class="label">Risk Reduction</div>
+                <div class="value" id="sim-res-redux" style="color: var(--accent-emerald);">--%</div>
+              </div>
+              <div class="sim-metric-cell">
+                <div class="label">Est. Recharge Gain</div>
+                <div class="value" id="sim-res-recharge" style="color: var(--accent-amber);">-- MCM</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 10px; font-size: 0.75rem; color: var(--text-muted);" id="sim-res-combo">
+              Recommended: Ridge-to-valley integrated structure suite.
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- MODAL: EXPLAIN SCORE & PARAMETER CONTRIBUTION -->
+  <div class="modal-overlay" id="explain-score-modal">
+    <div class="glass-panel modal-dialog">
+      <div class="modal-header">
+        <div class="card-title">
+          <i class="fa-solid fa-brain" style="color: var(--accent-cyan);"></i>
+          Explainable Water Stress Scoring Engine
+        </div>
+        <button class="btn-close" id="btn-close-explain-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Formula Text Box -->
+        <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">Governing Composite Formula:</div>
+        <div class="formula-box" id="modal-formula-display">
+          Score = (Rain_norm × 0.25) + (NDVI_norm × 0.20) + (Slope_norm × 0.15) + (Soil_norm × 0.15) + (DD_norm × 0.10) + (SW_norm × 0.10) + (LU_norm × 0.05)
+        </div>
+
+        <!-- Chart and Table Breakdown -->
+        <div style="display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: center;">
+          <div style="position: relative; height: 240px;">
+            <canvas id="contributionChart"></canvas>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; color: #fff;">
+              Parameter Contribution Breakdown for <span id="explain-ws-name" style="color: var(--accent-cyan);">--</span>
+            </div>
+            <table style="width: 100%; font-size: 0.78rem; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-color); text-align: left; color: var(--text-muted);">
+                  <th style="padding: 4px 6px;">Parameter</th>
+                  <th style="padding: 4px 6px;">Weight</th>
+                  <th style="padding: 4px 6px;">Norm (1-10)</th>
+                  <th style="padding: 4px 6px;">Contribution %</th>
+                </tr>
+              </thead>
+              <tbody id="explain-table-body">
+                <!-- Dynamically injected -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Rationale text -->
+        <div style="margin-top: 20px; padding: 12px; background: rgba(30, 41, 59, 0.5); border-radius: 8px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+          <b style="color: #fff;"><i class="fa-solid fa-lightbulb"></i> Explainability Rationale:</b> 
+          <span id="explain-rationale-text">Parameters are normalized using empirical hydrological bounds. Rainfall and vegetative NDVI carry 45% aggregate weight because prolonged deficit creates acute agrarian and groundwater stress.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" id="btn-modal-download-pdf">
+          <i class="fa-solid fa-download"></i> Download Full PDF Diagnostic
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet GIS JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Application Logic JS -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

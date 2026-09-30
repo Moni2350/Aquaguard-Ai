@@ -1,0 +1,420 @@
+[
+  {
+    "id": "MW-IND-01",
+    "name": "Marathwada Central - Sina Basin",
+    "state": "Maharashtra",
+    "district": "Beed",
+    "coordinates": [18.989, 75.76],
+    "polygon": [
+      [18.92, 75.68], [19.05, 75.71], [19.07, 75.83], [18.96, 75.84], [18.91, 75.77]
+    ],
+    "area_sq_km": 142.5,
+    "population": 48200,
+    "rainfall_mm": 510,
+    "ndvi": 0.22,
+    "slope_deg": 4.2,
+    "soil_type": "Black Sandy Loam",
+    "drainage_density_km_per_sq_km": 1.45,
+    "surface_water_pct": 1.8,
+    "land_use": "Rainfed Agriculture & Wasteland"
+  },
+  {
+    "id": "MW-IND-02",
+    "name": "Bundelkhand Upper Betwa Micro-Basin",
+    "state": "Madhya Pradesh",
+    "district": "Tikamgarh",
+    "coordinates": [24.74, 78.83],
+    "polygon": [
+      [24.68, 78.75], [24.81, 78.78], [24.82, 78.91], [24.70, 78.90], [24.65, 78.82]
+    ],
+    "area_sq_km": 178.0,
+    "population": 52100,
+    "rainfall_mm": 620,
+    "ndvi": 0.25,
+    "slope_deg": 6.8,
+    "soil_type": "Red Rocky Gravelly",
+    "drainage_density_km_per_sq_km": 2.1,
+    "surface_water_pct": 1.2,
+    "land_use": "Scrubland & Degraded Farmland"
+  },
+  {
+    "id": "MW-IND-03",
+    "name": "Rayalaseema Pennar Sub-Catchment",
+    "state": "Andhra Pradesh",
+    "district": "Anantapur",
+    "coordinates": [14.68, 77.60],
+    "polygon": [
+      [14.61, 77.52], [14.75, 77.54], [14.77, 77.68], [14.64, 77.69], [14.59, 77.61]
+    ],
+    "area_sq_km": 210.4,
+    "population": 61400,
+    "rainfall_mm": 480,
+    "ndvi": 0.18,
+    "slope_deg": 3.5,
+    "soil_type": "Red Sandy Soils",
+    "drainage_density_km_per_sq_km": 1.2,
+    "surface_water_pct": 0.9,
+    "land_use": "Arid Agriculture & Fallow"
+  },
+  {
+    "id": "MW-IND-04",
+    "name": "Vidarbha Purna River Headwaters",
+    "state": "Maharashtra",
+    "district": "Amravati",
+    "coordinates": [21.05, 77.75],
+    "polygon": [
+      [20.98, 77.68], [21.12, 77.70], [21.14, 77.84], [21.02, 77.83], [20.97, 77.74]
+    ],
+    "area_sq_km": 165.2,
+    "population": 43500,
+    "rainfall_mm": 690,
+    "ndvi": 0.31,
+    "slope_deg": 5.1,
+    "soil_type": "Deep Black Clay",
+    "drainage_density_km_per_sq_km": 1.7,
+    "surface_water_pct": 2.5,
+    "land_use": "Cotton/Soybean Cropland"
+  },
+  {
+    "id": "MW-IND-05",
+    "name": "Shekhawati Kantli River Drainage",
+    "state": "Rajasthan",
+    "district": "Jhunjhunu",
+    "coordinates": [28.12, 75.39],
+    "polygon": [
+      [28.05, 75.31], [28.18, 75.33], [28.20, 75.47], [28.09, 75.48], [28.03, 75.40]
+    ],
+    "area_sq_km": 195.8,
+    "population": 39800,
+    "rainfall_mm": 380,
+    "ndvi": 0.15,
+    "slope_deg": 2.1,
+    "soil_type": "Desert Sand & Calcareous",
+    "drainage_density_km_per_sq_km": 0.85,
+    "surface_water_pct": 0.4,
+    "land_use": "Semi-Arid Sand Dunes & Millets"
+  },
+  {
+    "id": "MW-IND-06",
+    "name": "Kolar-Chikkaballapur Palar Headwaters",
+    "state": "Karnataka",
+    "district": "Kolar",
+    "coordinates": [13.13, 78.13],
+    "polygon": [
+      [13.06, 78.06], [13.20, 78.08], [13.21, 78.21], [13.10, 78.22], [13.05, 78.14]
+    ],
+    "area_sq_km": 134.1,
+    "population": 57300,
+    "rainfall_mm": 710,
+    "ndvi": 0.34,
+    "slope_deg": 6.2,
+    "soil_type": "Lateritic Red Soil",
+    "drainage_density_km_per_sq_km": 1.9,
+    "surface_water_pct": 3.1,
+    "land_use": "Intensive Borewell Horticultural"
+  },
+  {
+    "id": "MW-IND-07",
+    "name": "Saurashtra Shetrunji Upper Valley",
+    "state": "Gujarat",
+    "district": "Amreli",
+    "coordinates": [21.60, 71.22],
+    "polygon": [
+      [21.53, 71.14], [21.67, 71.16], [21.68, 71.29], [21.57, 71.30], [21.51, 71.21]
+    ],
+    "area_sq_km": 182.6,
+    "population": 36900,
+    "rainfall_mm": 540,
+    "ndvi": 0.24,
+    "slope_deg": 4.8,
+    "soil_type": "Medium Black Basaltic",
+    "drainage_density_km_per_sq_km": 1.6,
+    "surface_water_pct": 1.5,
+    "land_use": "Groundnut/Cotton Dryland"
+  },
+  {
+    "id": "MW-IND-08",
+    "name": "Chhota Nagpur Damodar Tributary Basin",
+    "state": "Jharkhand",
+    "district": "Hazaribagh",
+    "coordinates": [23.99, 85.36],
+    "polygon": [
+      [23.92, 85.28], [24.06, 85.30], [24.08, 85.44], [23.95, 85.45], [23.90, 85.37]
+    ],
+    "area_sq_km": 158.4,
+    "population": 31200,
+    "rainfall_mm": 1150,
+    "ndvi": 0.58,
+    "slope_deg": 12.4,
+    "soil_type": "Red Sandy Clayey Loam",
+    "drainage_density_km_per_sq_km": 2.8,
+    "surface_water_pct": 4.5,
+    "land_use": "Deciduous Forest & Terraced Paddy"
+  },
+  {
+    "id": "MW-IND-09",
+    "name": "Western Ghats Netravati Ridge Sub-basin",
+    "state": "Karnataka",
+    "district": "Chikmagalur",
+    "coordinates": [13.25, 75.40],
+    "polygon": [
+      [13.18, 75.32], [13.32, 75.34], [13.33, 75.48], [13.22, 75.49], [13.16, 75.41]
+    ],
+    "area_sq_km": 112.0,
+    "population": 18900,
+    "rainfall_mm": 2400,
+    "ndvi": 0.82,
+    "slope_deg": 22.5,
+    "soil_type": "Laterite Humus Rich",
+    "drainage_density_km_per_sq_km": 3.6,
+    "surface_water_pct": 8.5,
+    "land_use": "Coffee Plantation & Wet Evergreen Forest"
+  },
+  {
+    "id": "MW-IND-10",
+    "name": "Kalahandi Tel River Watershed",
+    "state": "Odisha",
+    "district": "Kalahandi",
+    "coordinates": [19.91, 83.11],
+    "polygon": [
+      [19.84, 83.03], [19.98, 83.05], [19.99, 83.19], [19.87, 83.20], [19.82, 83.12]
+    ],
+    "area_sq_km": 174.5,
+    "population": 41200,
+    "rainfall_mm": 980,
+    "ndvi": 0.42,
+    "slope_deg": 7.4,
+    "soil_type": "Red and Yellow Soils",
+    "drainage_density_km_per_sq_km": 2.3,
+    "surface_water_pct": 2.8,
+    "land_use": "Mono-cropped Agriculture & Scrub"
+  },
+  {
+    "id": "MW-IND-11",
+    "name": "Shiwalik Kandi Foothill Basin",
+    "state": "Punjab",
+    "district": "Hoshiarpur",
+    "coordinates": [31.52, 75.91],
+    "polygon": [
+      [31.45, 75.83], [31.59, 75.85], [31.60, 75.99], [31.48, 76.00], [31.43, 75.92]
+    ],
+    "area_sq_km": 140.8,
+    "population": 46500,
+    "rainfall_mm": 860,
+    "ndvi": 0.46,
+    "slope_deg": 14.1,
+    "soil_type": "Piedmont Sandy Alluvium",
+    "drainage_density_km_per_sq_km": 3.1,
+    "surface_water_pct": 2.1,
+    "land_use": "Choe Torrent Gullies & Orchards"
+  },
+  {
+    "id": "MW-IND-12",
+    "name": "Chambal Ravines Sub-watershed",
+    "state": "Madhya Pradesh",
+    "district": "Morena",
+    "coordinates": [26.49, 77.99],
+    "polygon": [
+      [26.42, 77.91], [26.56, 77.93], [26.58, 78.07], [26.45, 78.08], [26.40, 78.00]
+    ],
+    "area_sq_km": 188.3,
+    "population": 34800,
+    "rainfall_mm": 670,
+    "ndvi": 0.21,
+    "slope_deg": 16.8,
+    "soil_type": "Deep Alluvial Loess",
+    "drainage_density_km_per_sq_km": 3.4,
+    "surface_water_pct": 1.4,
+    "land_use": "Severe Gully Erosion Badlands"
+  },
+  {
+    "id": "MW-IND-13",
+    "name": "Narmada Valley Upper Nimar Catchment",
+    "state": "Madhya Pradesh",
+    "district": "Khargone",
+    "coordinates": [21.82, 75.61],
+    "polygon": [
+      [21.75, 75.53], [21.89, 75.55], [21.90, 75.69], [21.78, 75.70], [21.73, 75.62]
+    ],
+    "area_sq_km": 162.7,
+    "population": 51000,
+    "rainfall_mm": 740,
+    "ndvi": 0.38,
+    "slope_deg": 5.9,
+    "soil_type": "Black Loamy Trap",
+    "drainage_density_km_per_sq_km": 1.8,
+    "surface_water_pct": 3.6,
+    "land_use": "Chilli & Cotton Irrigated Belt"
+  },
+  {
+    "id": "MW-IND-14",
+    "name": "Mewar Banas Tributary Zone",
+    "state": "Rajasthan",
+    "district": "Bhilwara",
+    "coordinates": [25.35, 74.63],
+    "polygon": [
+      [25.28, 74.55], [25.42, 74.57], [25.44, 74.71], [25.31, 74.72], [25.26, 74.64]
+    ],
+    "area_sq_km": 172.9,
+    "population": 44300,
+    "rainfall_mm": 580,
+    "ndvi": 0.28,
+    "slope_deg": 5.5,
+    "soil_type": "Mixed Red & Black Loam",
+    "drainage_density_km_per_sq_km": 1.5,
+    "surface_water_pct": 2.2,
+    "land_use": "Pastureland & Fodder Farming"
+  },
+  {
+    "id": "MW-IND-15",
+    "name": "Cauvery Deltaic Palavanthankudi Drain",
+    "state": "Tamil Nadu",
+    "district": "Thanjavur",
+    "coordinates": [10.78, 79.13],
+    "polygon": [
+      [10.71, 79.05], [10.85, 79.07], [10.87, 79.21], [10.74, 79.22], [10.69, 79.14]
+    ],
+    "area_sq_km": 128.5,
+    "population": 72400,
+    "rainfall_mm": 1020,
+    "ndvi": 0.65,
+    "slope_deg": 1.2,
+    "soil_type": "Deltaic Alluvial Clay",
+    "drainage_density_km_per_sq_km": 2.9,
+    "surface_water_pct": 6.8,
+    "land_use": "Triple Crop Rice Agro-ecosystem"
+  },
+  {
+    "id": "MW-IND-16",
+    "name": "Purvanchal Gomti Upper Catchment",
+    "state": "Uttar Pradesh",
+    "district": "Pilibhit",
+    "coordinates": [28.63, 79.80],
+    "polygon": [
+      [28.56, 79.72], [28.70, 79.74], [28.71, 79.88], [28.59, 79.89], [28.54, 79.81]
+    ],
+    "area_sq_km": 154.2,
+    "population": 68900,
+    "rainfall_mm": 990,
+    "ndvi": 0.52,
+    "slope_deg": 1.8,
+    "soil_type": "Tarai Silt Alluvium",
+    "drainage_density_km_per_sq_km": 1.9,
+    "surface_water_pct": 5.4,
+    "land_use": "Sugarcane & Wetland Marsh"
+  },
+  {
+    "id": "MW-IND-17",
+    "name": "Brahmaputra South Bank Kulsi Basin",
+    "state": "Assam",
+    "district": "Kamrup",
+    "coordinates": [26.05, 91.45],
+    "polygon": [
+      [25.98, 91.37], [26.12, 91.39], [26.13, 91.53], [26.01, 91.54], [25.96, 91.46]
+    ],
+    "area_sq_km": 169.0,
+    "population": 47600,
+    "rainfall_mm": 1950,
+    "ndvi": 0.74,
+    "slope_deg": 11.2,
+    "soil_type": "Acidic Red Loam",
+    "drainage_density_km_per_sq_km": 3.2,
+    "surface_water_pct": 7.9,
+    "land_use": "Sal Forest, Tea Gardens & Beels"
+  },
+  {
+    "id": "MW-IND-18",
+    "name": "Telangana Deccan Manjeera Sub-basin",
+    "state": "Telangana",
+    "district": "Sangareddy",
+    "coordinates": [17.62, 78.08],
+    "polygon": [
+      [17.55, 78.00], [17.69, 78.02], [17.70, 78.16], [17.58, 78.17], [17.53, 78.09]
+    ],
+    "area_sq_km": 147.6,
+    "population": 59100,
+    "rainfall_mm": 780,
+    "ndvi": 0.36,
+    "slope_deg": 4.1,
+    "soil_type": "Red Sandy Chalkas",
+    "drainage_density_km_per_sq_km": 1.6,
+    "surface_water_pct": 3.2,
+    "land_use": "Paddy, Maize & Urban Outskirts"
+  },
+  {
+    "id": "MW-IND-19",
+    "name": "Garhwal Alaknanda Riparian Micro-basin",
+    "state": "Uttarakhand",
+    "district": "Chamoli",
+    "coordinates": [30.40, 79.33],
+    "polygon": [
+      [30.33, 79.25], [30.47, 79.27], [30.48, 79.41], [30.36, 79.42], [30.31, 79.34]
+    ],
+    "area_sq_km": 122.3,
+    "population": 14200,
+    "rainfall_mm": 1450,
+    "ndvi": 0.69,
+    "slope_deg": 28.5,
+    "soil_type": "Glacio-fluvial Skeletal Stony",
+    "drainage_density_km_per_sq_km": 4.1,
+    "surface_water_pct": 4.0,
+    "land_use": "Alpine Conifer & Terraced Slopes"
+  },
+  {
+    "id": "MW-IND-20",
+    "name": "Konkan Vashishti Estuarine Upper Catchment",
+    "state": "Maharashtra",
+    "district": "Ratnagiri",
+    "coordinates": [17.53, 73.52],
+    "polygon": [
+      [17.46, 73.44], [17.60, 73.46], [17.61, 73.60], [17.49, 73.61], [17.44, 73.53]
+    ],
+    "area_sq_km": 139.7,
+    "population": 38100,
+    "rainfall_mm": 3100,
+    "ndvi": 0.78,
+    "slope_deg": 18.2,
+    "soil_type": "Laterite Loam & Coastal Alluvium",
+    "drainage_density_km_per_sq_km": 3.8,
+    "surface_water_pct": 9.2,
+    "land_use": "Mango/Cashew Orchards & Evergreen"
+  },
+  {
+    "id": "MW-IND-21",
+    "name": "Barmer Thar Inter-dunal Depression",
+    "state": "Rajasthan",
+    "district": "Barmer",
+    "coordinates": [25.75, 71.40],
+    "polygon": [
+      [25.68, 71.32], [25.82, 71.34], [25.83, 71.48], [25.71, 71.49], [25.66, 71.41]
+    ],
+    "area_sq_km": 240.0,
+    "population": 21500,
+    "rainfall_mm": 260,
+    "ndvi": 0.11,
+    "slope_deg": 1.8,
+    "soil_type": "Coarse Aeolian Sand",
+    "drainage_density_km_per_sq_km": 0.4,
+    "surface_water_pct": 0.2,
+    "land_use": "Hyper-arid Desert & Sparse Shrub"
+  },
+  {
+    "id": "MW-IND-22",
+    "name": "Bastar Indravati Plateau Tributary",
+    "state": "Chhattisgarh",
+    "district": "Bastar",
+    "coordinates": [19.07, 82.03],
+    "polygon": [
+      [19.00, 81.95], [19.14, 81.97], [19.15, 82.11], [19.03, 82.12], [18.98, 82.04]
+    ],
+    "area_sq_km": 185.1,
+    "population": 29800,
+    "rainfall_mm": 1350,
+    "ndvi": 0.63,
+    "slope_deg": 8.9,
+    "soil_type": "Red Sandy Clay Ferruginous",
+    "drainage_density_km_per_sq_km": 2.7,
+    "surface_water_pct": 4.8,
+    "land_use": "Dense Sal Forest & Minor Millets"
+  }
+]
